@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/careers.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="icon" href="./images/image.png">
+    <link rel="icon" href="./images/apptech gig logo (1).png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -21,7 +21,7 @@
 </head>
 <body>
     <header class="header">
-        <a href="#" class="logo"><img src="./images/image.png" alt=""></a>
+        <a href="#" class="logo"><img src="./images/apptech gig logo (1).png" alt=""></a>
         <div class="fas fa-bars"></div>
         <nav class="navbar">
             <ul>
@@ -43,11 +43,11 @@
 
     <section id="career-heading" class="career-heading">
         <h1 class="heading">Career</h1>
-        <p>Job Opening in IT Company. Apply Now!</p>
+        <p>Job Opening in AppTech Gig. Apply Now!</p>
     </section>
     <div class="career">
         <div class="career-form">
-            <form action="./careers.php" method="POST" enctype="multipart/form-data">
+            <form id="career-form" action="https://script.google.com/macros/s/AKfycbxkIFLzfZPd0JDajJrAiZHo97Lq2sbYHibJU1z7JDbJBCz8zUBus4Dhdjx8whekkVfK/exec" method="POST" enctype="multipart/form-data">
                 <input type="text" name="name" placeholder="Name" class="career-form-txt" required>
                 <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="Contact number" maxlength="10" class="career-form-phone">
                 <input type="email" name="email" placeholder="Email" class="career-form-email" required>
@@ -81,27 +81,148 @@
                 </div>
                 <input type="number" id="experience" name="experience" required placeholder="Years of Experience" class="career-form-experience">
                 <textarea placeholder="Other Details" name="details" class="career-form-txtarea" required></textarea>
-                <div class="file">
+                <!--<div class="file">
                     <h2 class="name">Upload Your Resume</h2>
                     <input class="upload" type="file" name="fileToUpload" accept=".doc,.docx,.pdf"><br><br><br>
                 </div>
-                <input type="submit" value="Submit" name="submit" class="career-form-btn">
+                
+            -->
+            <input type="submit" value="Submit" name="submit" class="career-form-btn">
             </form>
+            <div id="popup" class="popup hidden">
+                <div class="popup-content">
+                    <h1 class="contact__card-title"><b>MESSAGE SENT!</b></h1><br>
+                    <p class="">Thank you for reaching out. We'll get back to you shortly.</p>
+                    <button id="close-popup" class="close-btn"><a href="index.html#">Close</a></button>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+        
+            .popup {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 300px;
+                padding: 20px;
+                background: #000000;
+                color: white;
+                border-radius: 5px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+            }
+        
+            .popup-content {
+                text-align: center;
+            }
+        
+            .popup.hidden {
+                display: none;
+            }
+        
+            .popup.visible {
+                display: block;
+                opacity: 1;
+            }
+        
+            .close-btn {
+                margin-top: 15px;
+                padding: 10px 15px;
+                background: white;
+                color: #0d0c2a;
+                border: none;
+                border-radius: 200px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+        
+            .close-btn:hover {
+                background: #f1f1f1;
+            }
+        </style>
+        
+        <script>
+            
+            document.getElementById("career-form").onsubmit = function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                const form = event.target;
+        
+                // Create FormData object
+                const formData = new FormData(form);
+        
+                // Send the data to the Google Apps Script
+                fetch(form.action, {
+                    method: 'post',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === "success") {
+                        // Show the popup on success
+                        showPopup();
+                    } else {
+                        alert("Error: " + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("There was an error submitting the form.");
+                });
+            };
+        
+            function showPopup() {
+                const popup = document.getElementById("popup");
+                popup.classList.remove("hidden");
+                popup.classList.add("visible");
+            }
+        
+            document.getElementById("close-popup").onclick = function() {
+                const popup = document.getElementById("popup");
+                popup.classList.remove("visible");
+                popup.classList.add("hidden");
+            };
+            function doPost(e) {
+            var name = e.parameter.name;
+            var email = e.parameter.email;
+            var phone = e.parameter.phone;
+            var status = e.parameter.status;
+            var experience = e.parameter.experience;
+            var details = e.parameter.details;
+            
+            // Handle file upload here
+            var file = e.parameter.fileToUpload;
+            
+            // Process form data
+            // Send email or save to Google Sheets
+
+            // Return a success response
+            return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+            }
+
+        </script>  
         </div>
     </div>
 
-      <div class="footer">
+    <div class="footer">
         <div class="footer-top">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>About Us</h4>
                         <ul>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#home">Home</a></li>
+                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#">Home</a></li>
                             <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#about">About us</a></li>
                             <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#service">Our services</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#home">Terms & condition</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#home">Privacy policy</a></li>
+                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#">Terms & condition</a></li>
+                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#">Privacy policy</a></li>
                         </ul>
                     </div>
   
@@ -110,7 +231,7 @@
                         <ul>
                             <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#portfolio">Portfolio</a></li>
                             <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#team">Team</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="careers.html">Career</a></li>
+                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.htmlcareers.html">Career</a></li>
                             <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#contact">Contact</a></li>
                             <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#faq">FAQ</a></li>
                         </ul>
@@ -119,31 +240,32 @@
                     <div class="col-lg-3 col-md-6 footer-contact" style="font-size: 1.5rem;">
                         <h4>Contact Us</h4>
                         <p>
-                            1300  Center Avenue<br>
-                            Fresno, California<br>
-                            United States <br>
-                            <strong>Phone:</strong> +123-456-7890<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            Malappuram, Kerala<br>
+                            India <br>
+                            <strong>Phone:</strong> +91 8281302974<br>
+                            <strong>Email:</strong> apptechgig@gmail.com<br>
                         </p>
   
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/"><i class="ion-logo-facebook"></i></a>
-                            <a href="https://twitter.com/login?lang=en"><i class="ion-logo-twitter"></i></a>
-                            <a href="https://www.linkedin.com/"><i class="ion-logo-linkedin"></i></a>
-                            <a href="https://www.instagram.com/"><i class="ion-logo-instagram"></i></a>
-                            <a href="https://accounts.google.com/servicelogin/signinchooser?flowName=GlifWebSignIn&flowEntry=ServiceLogin"><i class="ion-logo-googleplus"></i></a>
-                        </div>
+             <!--
+                           <div class="col-lg-3 col-md-6 footer-newsletter">
+                          <h4>Subscription</h4>
+                          <p>With Our Skills Put Together, You Get An Ensemble Capable Of Doing Anything And Everything Your Brand Needs. Subscribe Here To Get Our Latest Updates.</p>
+                          <form action="" method="post">
+                              <input type="email" name="email"><input type="submit"  value="Subscribe">
+                          </form>
+                          </div>
+                  -->           
   
                     </div>
   
-                    <div class="col-lg-3 col-md-6 footer-newsletter">
-                        <h4>Subscription</h4>
-                        <p>With Our Skills Put Together, You Get An Ensemble Capable Of Doing Anything And Everything Your Brand Needs. Subscribe Here To Get Our Latest Updates.</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit"  value="Subscribe">
-                        </form>
-                    </div>
-  
+                    
+                    <div class="social-links">
+                      <a href="https://www.facebook.com/"><i class="ion-logo-facebook"></i></a>
+                      <a href="https://twitter.com/login?lang=en"><i class="ion-logo-twitter"></i></a>
+                      <a href="https://www.linkedin.com/"><i class="ion-logo-linkedin"></i></a>
+                      <a href="https://www.instagram.com/"><i class="ion-logo-instagram"></i></a>
+                      <a href="https://accounts.google.com/servicelogin/signinchooser?flowName=GlifWebSignIn&flowEntry=ServiceLogin"><i class="ion-logo-googleplus"></i></a>
+                  </div>
                 </div>
             </div>
         </div>
