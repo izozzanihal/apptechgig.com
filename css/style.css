@@ -160,19 +160,12 @@ body{
 }
 
 /* Apply background image only on laptop (screen width 1024px and up) */
-@media (min-width: 1024px) {
+@media {
     .home {
         background-image: url(../images/apptecgigbgphone.jpg);
-        background-size: cover;
     }
 }
 
-/* For smaller screens like phones (below 1024px), no background image */
-@media (max-width: 1023px) {
-    .home {
-        background-image: none;
-    }
-}
 
 
 .home h1{
